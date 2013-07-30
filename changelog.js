@@ -14,7 +14,7 @@ var GIT_DIR = '--git-dir=' + process.argv[2].replace(/\/?$/, '/.git');
 var GIT_HOST = '';
 
 // 如果没有传 commit 的 range，就只看今天的
-var COMMIT_RANGE = process.argv[3] ? process.argv[3] : '--after="yesterday"';
+var COMMIT_RANGE = process.argv[3] ? process.argv[3] + "...HEAD" : '--after="yesterday"';
 
 var GIT_HOST_CMD = 'git ' + GIT_DIR + ' config remote.origin.url | sed -E "s/git@(.*):(.*)\\.git/\\1\\/\\2/g"';
 var GIT_LOG_CMD = 'git ' + GIT_DIR + ' log --grep="%s" -E --format=%s ' + COMMIT_RANGE;
