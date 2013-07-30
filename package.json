@@ -12,5 +12,7 @@
   },
   "author": "c4605",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "qq": "~0.3.5"
+  }
 }
