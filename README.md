@@ -40,13 +40,13 @@ Generating changelog to stdout ( undefined )
 
 ```
 
-## 项目依赖
-
-* qq (npm install qq)
-
 ## 使用方法
 
 ```bash
+# 首先安装依赖
+npm install
+
+# 然后使用
 node changelog.js [Git 项目路径] [Git log 日志的范围，如果不传则过滤出今日的 commit]
 ```
 
