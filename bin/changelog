@@ -10,7 +10,7 @@ var fs = require('fs');
 var util = require('util');
 var q = require('qq');
 
-var GIT_DIR = '--git-dir=' + process.argv[2].replace(/\/?$/, '/.git');
+var GIT_DIR = '--git-dir=' + (process.argv[2] || process.cwd()).replace(/\/?$/, '/.git');
 var GIT_HOST = '';
 
 // 如果没有传 commit 的 range，就只看今天的

@@ -2,7 +2,10 @@
   "name": "commit2changelog",
   "version": "0.0.1",
   "description": "Generate changelog from commit",
-  "main": "changelog.js",
+  "main": "bin/changelog",
+  "bin": {
+    "changelog": "bin/changelog"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

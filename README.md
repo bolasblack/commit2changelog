@@ -40,13 +40,17 @@ Generating changelog to stdout ( undefined )
 
 ```
 
+## 安装方法
+
+先将项目克隆至本地，进入目录后执行下列代码：
+
+```bash
+npm install ./ -g
+```
+
 ## 使用方法
 
 ```bash
-# 首先安装依赖
-npm install
-
-# 然后使用
-node changelog.js [Git 项目路径] [Git log 日志的范围，如果不传则过滤出今日的 commit]
+changelog [目标项目目录] [起始历史 SHA]
 ```
 
