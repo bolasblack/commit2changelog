@@ -45,7 +45,7 @@ Generating changelog to stdout ( undefined )
 先将项目克隆至本地，进入目录后执行下列代码：
 
 ```bash
-npm install ./ -g
+npm install coffee-script ./ -g
 ```
 
 ## 使用方法

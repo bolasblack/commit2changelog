@@ -2,9 +2,9 @@
   "name": "commit2changelog",
   "version": "0.0.1",
   "description": "Generate changelog from commit",
-  "main": "bin/changelog",
+  "main": "bin/changelog.js",
   "bin": {
-    "changelog": "bin/changelog"
+    "changelog": "bin/changelog.coffee"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,7 @@
   "author": "c4605",
   "license": "MIT",
   "dependencies": {
-    "qq": "~0.3.5"
+    "qq": "~0.3.5",
+    "docopt": "~0.4.0"
   }
 }
