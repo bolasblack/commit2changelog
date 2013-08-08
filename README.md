@@ -3,6 +3,8 @@
 
 本工具的目标是根据既定的 commit 格式生成 markdown 格式的 changelog 。
 
+感谢 [AngularJS 项目](https://github.com/angular/angular.js)的[代码](https://github.com/angular/angular.js/blob/master/changelog.js)。
+
 ## 目标生成结果
 
 ```
