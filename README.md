@@ -1,5 +1,4 @@
 # Commit2Changelog
-
 ## Intro
 
 本工具的目标是根据既定的 commit 格式生成 markdown 格式的 changelog 。
@@ -51,6 +50,6 @@ npm install coffee-script ./ -g
 ## 使用方法
 
 ```bash
-changelog [目标项目目录] [起始历史 SHA]
+changelog -h
 ```
 

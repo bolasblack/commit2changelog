@@ -4,15 +4,30 @@
 # TODO(vojta): report errors, currently Q silence everything which really sucks
 
 child = require 'child_process'
-fs = require 'fs'
+path = require 'path'
 util = require 'util'
+fs = require 'fs'
+{docopt} = require 'docopt'
 q = require 'qq'
 
-GIT_DIR = '--git-dir=' + (process.argv[2] or process.cwd()).replace /\/?$/, '/.git'
+help = """
+Usage: changelog [options] [<range>]
+
+Options:
+  -p, --exec-path=<project path>    Set target project path, [default ./].
+  -v, --version                     Show version.
+  -h, --help                        Show this.
+"""
+
+binFilePath = path.dirname process.argv[1]
+packageInfo = JSON.parse fs.readFileSync path.resolve binFilePath, '../package.json'
+options = docopt help, argv: process.argv[2..], help: true, version: packageInfo.version
+
+GIT_DIR = '--git-dir=' + (options['--exec-path'] or process.cwd()).replace /\/?$/, '/.git'
 GIT_HOST = ''
 
 # 如果没有传 commit 的 range，就只看今天的
-COMMIT_RANGE = if process.argv[3]? then "#{process.argv[3]}...HEAD" else '--after="yesterday"'
+COMMIT_RANGE = if options['<commit_range>'] then "#{options['<commit_range>']}...HEAD" else '--after="yesterday"'
 
 GIT_HOST_CMD = "git #{GIT_DIR} config remote.origin.url | sed -E 's/git@(.*):(.*)\\.git/\\1\\/\\2/g'"
 GIT_LOG_CMD = "git #{GIT_DIR} log --grep='%s' -E --format=%s #{COMMIT_RANGE}"
