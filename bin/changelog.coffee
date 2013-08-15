@@ -27,7 +27,7 @@ GIT_DIR = '--git-dir=' + (options['--exec-path'] or process.cwd()).replace /\/?$
 GIT_HOST = ''
 
 # 如果没有传 commit 的 range，就只看今天的
-COMMIT_RANGE = if options['<range>'] then "#{options['<range>']}...HEAD" else '--after="yesterday"'
+COMMIT_RANGE = if options['<range>'] then options['<range>'] else '--after="yesterday"'
 
 GIT_HOST_CMD = "git #{GIT_DIR} config remote.origin.url | sed -E 's/git@(.*):(.*)\\.git/\\1\\/\\2/g'"
 GIT_LOG_CMD = "git #{GIT_DIR} log --grep='%s' -E --format=%s #{COMMIT_RANGE}"
