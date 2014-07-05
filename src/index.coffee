@@ -1,7 +1,4 @@
-#!/usr/bin/env coffee
-
-# TODO(vojta): pre-commit hook for validating messages
-# TODO(vojta): report errors, currently Q silence everything which really sucks
+#!/usr/bin/env node
 
 child = require 'child_process'
 path = require 'path'
@@ -19,8 +16,7 @@ Options:
   -h, --help                        Show this.
 """
 
-binFilePath = path.dirname process.argv[1]
-packageInfo = JSON.parse fs.readFileSync path.resolve binFilePath, '../package.json'
+packageInfo = JSON.parse fs.readFileSync path.resolve __dirname, '../package.json'
 options = docopt help, argv: process.argv[2..], help: true, version: packageInfo.version
 
 GIT_DIR = '--git-dir=' + (options['--exec-path'] or process.cwd()).replace /\/?$/, '/.git'
@@ -120,7 +116,7 @@ printSection = (stream, title, section, printCommitLinks) ->
 
     section[name].forEach (commit) ->
       if printCommitLinks
-        stream.write(util.format('%s %s\n  (%s', prefix, commit.subject, linkToCommit(commit.hash)));
+        stream.write(util.format('%s %s\n  (%s', prefix, commit.subject, linkToCommit(commit.hash)))
         if commit.closes.length
           stream.write(',\n   ' + commit.closes.map(linkToIssue).join(', '))
         stream.write(')\n')
@@ -133,7 +129,6 @@ printSection = (stream, title, section, printCommitLinks) ->
 readGitLog = (grep) ->
   deferred = q.defer()
 
-  # TODO(vojta): if it's slow, use spawn and stream it instead
   endStr = '%H%n%s%n%b%n==END=='
   child.exec util.format(GIT_LOG_CMD, grep, endStr), (code, stdout, stderr) ->
     commits = []
@@ -188,10 +183,8 @@ generate = (version, file) ->
 # publish for testing
 exports.parseRawCommit = parseRawCommit
 
-
-# hack for git repo host addr
-child.exec GIT_HOST_CMD, (error, stdout, stderr) ->
-  GIT_HOST = 'http://' + stdout.replace /\n?$/, ''
-  generate()
-
+exports.run = ->
+  child.exec GIT_HOST_CMD, (error, stdout, stderr) ->
+    GIT_HOST = 'http://' + stdout.replace /\n?$/, ''
+    generate()
 
